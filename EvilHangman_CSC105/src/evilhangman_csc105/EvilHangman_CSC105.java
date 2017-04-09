@@ -13,10 +13,12 @@ public class EvilHangman_CSC105 {
 
     public static void main(String[] arg) {
         EvilHangman_CSC105 e1 = new EvilHangman_CSC105();
+        System.out.println(e1.getSecretWordLength());
+        System.out.println(e1.displayDashline());
     }
 
     public EvilHangman_CSC105() {
-
+        guessCount = 10;
     }
 
     public String getSecretWord() {
@@ -28,6 +30,7 @@ public class EvilHangman_CSC105 {
     }
 
     public int getSecretWordLength() {
+        secretWordLength = (int)(Math.random() * 7 + 1);
         return secretWordLength;
     }
 
@@ -36,6 +39,11 @@ public class EvilHangman_CSC105 {
     }
 
     public String displayDashline() {
+        dashline = "";
+        for(int i=0; i<secretWordLength; i++){
+            String temp = "_ ";
+            dashline += temp;
+        }
         return dashline;
     }
 
