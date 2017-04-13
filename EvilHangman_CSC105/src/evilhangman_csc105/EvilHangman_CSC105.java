@@ -1,5 +1,7 @@
 package evilhangman_csc105;
 
+import java.util.Scanner;
+
 public class EvilHangman_CSC105 {
 
     private String secretWord;
@@ -13,7 +15,7 @@ public class EvilHangman_CSC105 {
 
     public static void main(String[] arg) {
         EvilHangman_CSC105 e1 = new EvilHangman_CSC105();
-        System.out.println(e1.getSecretWordLength());
+        e1.setSecretWordLength(0);
         System.out.println(e1.displayDashline());
     }
 
@@ -30,11 +32,14 @@ public class EvilHangman_CSC105 {
     }
 
     public int getSecretWordLength() {
-        secretWordLength = (int)(Math.random() * 7 + 1);
+        //secretWordLength = (int)(Math.random() * 7 + 1);
         return secretWordLength;
     }
 
     public void setSecretWordLength(int secretWordLength) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter word length : ");
+        secretWordLength = sc.nextInt();
         this.secretWordLength = secretWordLength;
     }
 
