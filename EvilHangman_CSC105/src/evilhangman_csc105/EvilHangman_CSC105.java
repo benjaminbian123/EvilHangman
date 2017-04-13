@@ -1,12 +1,19 @@
 package evilhangman_csc105;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class EvilHangman_CSC105 {
 
     private String secretWord;
     private String dashline;
-    private String[] word;
+    private String[] word = new String[50000];
     private char[] letterGuessHistory;
     private int secretWordLength;
     private int guessCount;
@@ -17,6 +24,7 @@ public class EvilHangman_CSC105 {
         EvilHangman_CSC105 e1 = new EvilHangman_CSC105();
         e1.setSecretWordLength(0);
         System.out.println(e1.displayDashline());
+        e1.getSecretWord();
     }
 
     public EvilHangman_CSC105() {
@@ -24,7 +32,28 @@ public class EvilHangman_CSC105 {
     }
 
     public String getSecretWord() {
-        return secretWord;
+        String fileName = "C:\\Users\\PS\\Desktop\\EvilHangman_CSC105\\dictionary.txt";
+        File file = new File(fileName);
+        int count=0;
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String line;
+            while((line = br.readLine()) != null){
+                if(line.length() == secretWordLength){ //
+                    word[count] = line; //arrayคำที่มีจำนวนlenghtที่กำหนด
+                    System.out.println(word[count]); //ลองปริ้น
+                    count++;
+                }
+            }
+            System.out.println(count);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(EvilHangman_CSC105.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(EvilHangman_CSC105.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return "eiei";
+        //return secretWord;
     }
 
     public void setSecretWord(String secretWord) {
@@ -38,9 +67,17 @@ public class EvilHangman_CSC105 {
 
     public void setSecretWordLength(int secretWordLength) {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter word length : ");
-        secretWordLength = sc.nextInt();
-        this.secretWordLength = secretWordLength;
+        for(int i=0; i >= -1; i++){
+            System.out.print("Enter word length : ");
+            secretWordLength = sc.nextInt();
+            if(secretWordLength > 1 && (secretWordLength != 23 || secretWordLength != 25 ||   //no length 1 23 25 26 27
+                secretWordLength != 26 || secretWordLength != 27) && secretWordLength < 30){  
+                this.secretWordLength = secretWordLength;
+                break;
+            } else {
+                System.out.println("Don't have word with that length. Please try again");
+            }
+        }
     }
 
     public String displayDashline() {
