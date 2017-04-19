@@ -14,24 +14,58 @@ public class EvilHangman_CSC105 {
     private String secretWord;
     private String dashline;
     private String[] word = new String[50000];
-    private char[] letterGuessHistory;
+    private char[] letterGuessHistory = new char[10];
     private int secretWordLength;
     private int guessCount;
     private int pointer_guesshistory;
     private boolean guessResult;
+    
+    private static int countLetterGuessHistory;
 
     public static void main(String[] arg) {
         EvilHangman_CSC105 e1 = new EvilHangman_CSC105();
-        e1.setSecretWordLength(0);
+        e1.setSecretWordLength();
         System.out.println(e1.displayDashline());
-        e1.getSecretWord();
+        e1.getWordsFromDic();
+        e1.inputLetter();
+        e1.inputLetter();
+        e1.inputLetter();
+        e1.inputLetter();
     }
 
     public EvilHangman_CSC105() {
         guessCount = 10;
+        countLetterGuessHistory = 0;
     }
 
-    public String getSecretWord() {
+    public void inputLetter(){
+        Scanner sc = new Scanner(System.in);
+        for(int i=0; i >= -1; i++){
+            System.out.print("Enter a letter : ");
+            char inputLetter = sc.next().toLowerCase().charAt(0);
+            int countCheck = -1; //เอาไว้เช็คว่า input ซ้ำตัวเดิมมั้ย
+            for(int j=0; j<=countLetterGuessHistory; j++){ //เช็คว่า input ซ้ำตัวเดิมมั้ย
+                if(inputLetter != letterGuessHistory[j]){
+                    countCheck++;
+                }
+            }
+            if((inputLetter >= 97 && inputLetter <= 122) && countCheck == countLetterGuessHistory){ //เช็คว่า input เป็น letter
+                letterGuessHistory[countLetterGuessHistory] = inputLetter; //เก็บ letter ลงใน array
+                countLetterGuessHistory++;
+                break;
+            } else {
+                System.out.println("Enter one letter. Please try again."); //ถ้าใส่ผิดให้ใส่ใหม่
+            }
+        }
+        
+        System.out.print("Letter you have guessed : "); //ปริ้น letter ที่เดาไป
+        for(int i=0; i<countLetterGuessHistory; i++){
+            System.out.print(letterGuessHistory[i]+ " ");
+        }
+        System.out.println("");
+    }
+    
+    public void getWordsFromDic(){
         String fileName = "C:\\Users\\PS\\Desktop\\EvilHangman_CSC105\\dictionary.txt";
         File file = new File(fileName);
         int count=0;
@@ -39,23 +73,24 @@ public class EvilHangman_CSC105 {
             BufferedReader br = new BufferedReader(new FileReader(file));
             String line;
             while((line = br.readLine()) != null){
-                if(line.length() == secretWordLength){ //
-                    word[count] = line; //arrayคำที่มีจำนวนlenghtที่กำหนด
-                    System.out.println(word[count]); //ลองปริ้น
+                if(line.length() == secretWordLength){ //เลือกเฉพาะคำที่มีlegthตามต้องการ
+                    word[count] = line; //arrayคำที่มีจำนวนlengthที่กำหนด
+                    //System.out.println(word[count]); //ลองปริ้น
                     count++;
                 }
             }
-            System.out.println(count);
+            System.out.println("Words with length " + secretWordLength + " have " + count + " words");
         } catch (FileNotFoundException ex) {
             Logger.getLogger(EvilHangman_CSC105.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(EvilHangman_CSC105.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        return "eiei";
-        //return secretWord;
     }
-
+    
+    public String getSecretWord() {
+        return secretWord;
+    }
+    
     public void setSecretWord(String secretWord) {
         this.secretWord = secretWord;
     }
@@ -65,14 +100,14 @@ public class EvilHangman_CSC105 {
         return secretWordLength;
     }
 
-    public void setSecretWordLength(int secretWordLength) {
+    public void setSecretWordLength() {
         Scanner sc = new Scanner(System.in);
         for(int i=0; i >= -1; i++){
             System.out.print("Enter word length : ");
-            secretWordLength = sc.nextInt();
-            if(secretWordLength > 1 && (secretWordLength != 23 || secretWordLength != 25 ||   //no length 1 23 25 26 27
-                secretWordLength != 26 || secretWordLength != 27) && secretWordLength < 30){  
-                this.secretWordLength = secretWordLength;
+            int inputLength = sc.nextInt();
+            if(inputLength > 1 && (inputLength != 23 && inputLength != 25 &&   //no length 1 23 25 26 27
+                inputLength != 26 && inputLength != 27) && inputLength < 30){  
+                this.secretWordLength = inputLength;
                 break;
             } else {
                 System.out.println("Don't have word with that length. Please try again");
