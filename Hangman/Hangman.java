@@ -16,6 +16,7 @@ public class Hangman{
   public static boolean checkLength = false; // check length to loop input of length
   public static boolean checkGuess = false;  // check length to loop input of guesses
   public static boolean check = false;  // check to loop a games
+  private static String name = ""; // to require name
   File dict = new File("dictionary.txt"); // dictionary 
   
   public static void main(String [] args){
@@ -45,14 +46,14 @@ public class Hangman{
       String temp = readdict.nextLine();
       if(temp.length()==secretWordLength){
         word[i] = temp;
-        i++;
+        i++; // loop run
         wordCount++; // count a word
       }
     }
     for(i = 0; i< secretWordLength; i++){
       dashLine += "_ "; // created dash line _ _ _ _
     }
-    readdict.close();
+    readdict.close(); // close files
   }
   
   public void play(){ // play method
@@ -76,18 +77,20 @@ public class Hangman{
     while(isPlay==true){ // while user played
       
       while(checkLength==false){ // while user input length
+        System.out.print("Enter your name : ");
+        setName(sc.nextLine()); // enter name
         System.out.print("Enter word length you want to play : ");
-        int length = sc.nextInt();
+        int length = sc.nextInt(); // enter length
         if(length>1 && length<23 || length==24 || length == 28 || length == 29){ // 1-22 and not equal to 24 28 29
           
           while(checkGuess==false){
             System.out.print("Enter number of your guess :");
-            int count =  sc.nextInt();
+            int count =  sc.nextInt(); // enter num of guess
             if(count>0 && count<=26){
               Hangman h = new Hangman(length,count);
               checkLength = true;
               checkGuess = true;
-              h.play();
+              h.play(); // recursive it
             }
             
             else if(count==0 || count>26){ // 0, more than 26 = cheater
@@ -111,10 +114,12 @@ public class Hangman{
         if(guessCount==0){ // LOSE
           isPlay = false; // stop user
           if(check==false){
-          System.out.println("----------------------------------------------------------------");
-          System.out.println("SORRY YOU LOSE !!");
-          System.out.println("The secret word is : "+getSecretWord());
-          System.out.println("----------------------------------------------------------------");
+            System.out.println("----------------------------------------------------------------");
+            System.out.println("SORRY YOU LOSE !!");
+            System.out.println("The secret word is : "+getSecretWord());
+            System.out.println("Player name : "+getName());
+            System.out.println("Guess remaining : "+guessCount());
+            System.out.println("----------------------------------------------------------------");
           }
           playAgain(); // ask to play again
           break;
@@ -123,6 +128,8 @@ public class Hangman{
           System.out.println("----------------------------------------------------------------");
           System.out.println("CONGRATULATIONS YOU WIN !!");
           System.out.println("The secret word is : "+getSecretWord());
+          System.out.println("Player name : "+getName());
+          System.out.println("Guess remaining : "+guessCount());
           System.out.println("----------------------------------------------------------------");
           check = false;
           playAgain();
@@ -136,6 +143,7 @@ public class Hangman{
         System.out.println("Word : "+displayDashline());
         System.out.println("Guess remaining : "+guessCount());
         System.out.println("----------------------------------------------------------------");
+        System.out.println("Player name : "+getName());
         System.out.println("Letter that you already used :"+showLetterGuess());
         System.out.println("----------------------------------------------------------------");
         //System.out.println(getSecretWord()); //show secret word
@@ -273,6 +281,12 @@ public class Hangman{
   
   public String displayDashline() {
     return dashLine; // show dashline
+  }
+  public String getName(){
+     return name;
+  }
+  public void setName(String name){
+    this.name = name;
   }
   
   public String showLetterGuess() {

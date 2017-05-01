@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.*; // import 
 import java.io.*;
 
 public class Hangman{
@@ -11,7 +11,7 @@ public class Hangman{
   private String[] word = new String[127142]; // 127142 words
   private int wordCount = 0; // count only possible word that you choose the length
   private int secretWordLength; // length of secret word
-  private boolean guessResult = false; 
+  private boolean guessResult = false; // check that you input correct or not
   public static boolean isPlay = true; // check that user play or not
   public static boolean checkLength = false; // check length to loop input of length
   public static boolean checkGuess = false;  // check length to loop input of guesses
@@ -32,15 +32,15 @@ public class Hangman{
     check = false; // define 3 check
     checkGuess = false; 
     checkLength = false;
-    this.guessCount = guessCount;
-    this.secretWordLength = secretWordLength;
+    this.guessCount = guessCount; // set count
+    this.secretWordLength = secretWordLength; // set length
     Scanner readdict = null;
     try{
       readdict = new Scanner(dict); // read dictionary
     } catch(Exception e){
-      throw new RuntimeException(e);
+      throw new RuntimeException(e); // catch exception
     }
-    int i = 0; 
+    int i = 0; // use to loop
     while(readdict.hasNext()) { // while it have next
       String temp = readdict.nextLine();
       if(temp.length()==secretWordLength){
@@ -73,9 +73,9 @@ public class Hangman{
     System.out.println("                your chances will be minused one.               ");
     System.out.println("----------------------------------------------------------------");
     
-    while(isPlay==true){
+    while(isPlay==true){ // while user played
       
-      while(checkLength==false){
+      while(checkLength==false){ // while user input length
         System.out.print("Enter word length you want to play : ");
         int length = sc.nextInt();
         if(length>1 && length<23 || length==24 || length == 28 || length == 29){ // 1-22 and not equal to 24 28 29
@@ -90,7 +90,7 @@ public class Hangman{
               h.play();
             }
             
-            else if(count==0 || count>26){
+            else if(count==0 || count>26){ // 0, more than 26 = cheater
               System.out.println("0 guess or more than 26 guess. NOT ALLOWED. Please try again");
             }
             else{
@@ -109,14 +109,14 @@ public class Hangman{
       while(guessCount>=0){ // loop check and play
         String temp = dashLine.replaceAll(" ",""); // check that our dashline -> secretword or not
         if(guessCount==0){ // LOSE
-          isPlay = false;
+          isPlay = false; // stop user
           if(check==false){
           System.out.println("----------------------------------------------------------------");
           System.out.println("SORRY YOU LOSE !!");
           System.out.println("The secret word is : "+getSecretWord());
           System.out.println("----------------------------------------------------------------");
           }
-          playAgain();
+          playAgain(); // ask to play again
           break;
         }
         else if(temp.equals(getSecretWord())){ // WIN
@@ -138,10 +138,10 @@ public class Hangman{
         System.out.println("----------------------------------------------------------------");
         System.out.println("Letter that you already used :"+showLetterGuess());
         System.out.println("----------------------------------------------------------------");
-        System.out.println(getSecretWord());
-        System.out.println(temp);
+        //System.out.println(getSecretWord()); //show secret word
+        //System.out.println(temp); // check word on dashline that == secret word?
         System.out.print("Enter a letter to guess : ");
-        makeGuess(sc.next().charAt(0));
+        makeGuess(sc.next().charAt(0)); // make a guess
       }
     }
   }
@@ -225,14 +225,14 @@ public class Hangman{
       System.out.println("                Do you want to play again ? (y/n)               ");
       System.out.println("----------------------------------------------------------------");
       char input = sc.next().charAt(0);
-      if(input=='y' || input=='Y'){
+      if(input=='y' || input=='Y'){ // Yes
         check = true;
         checkGuess = false;
         checkLength = false;
         play();
         break;
       }
-      else if(input=='n' || input=='N'){ 
+      else if(input=='n' || input=='N'){ // No
         System.out.println("----------------------------------------------------------------");
         System.out.println("                     Thank for playing !!                       ");
         System.out.println("----------------------------------------------------------------");
@@ -242,7 +242,7 @@ public class Hangman{
         check = true;
         break;
       }
-      else {
+      else { // not Y or N
         System.out.println("----------------------------------------------------------------");
         System.out.println("                  Invalid input, Try again !!"                   );
         System.out.println("----------------------------------------------------------------");
@@ -252,7 +252,7 @@ public class Hangman{
     }
   }
   
-  public void checkHistory(char ch){
+  public void checkHistory(char ch){ // check that user input same word as before
     String temp = letterGuessHistory.replaceAll(" ","");
     for(int i = 0; i< temp.length(); i++){
       if(temp.charAt(i)==ch){
@@ -264,22 +264,22 @@ public class Hangman{
   }
   
   public String getSecretWord() {
-    return secretWord;
+    return secretWord; // show secret word
   }
   
   public int guessCount() {
-    return guessCount;
+    return guessCount; // show guess count
   }
   
   public String displayDashline() {
-    return dashLine;
+    return dashLine; // show dashline
   }
   
   public String showLetterGuess() {
-    if (!guessResult) {
-      letterGuessHistory = letterGuessHistory +" "+ letterGuess;
+    if (!guessResult) { // if it false
+      letterGuessHistory = letterGuessHistory +" "+ letterGuess; // add history
     }
-    return letterGuessHistory;
+    return letterGuessHistory; // return hostory
   }
   
 }
