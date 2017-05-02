@@ -20,16 +20,20 @@ public class Hangman{
   File dict = new File("dictionary.txt"); // dictionary 
   
   public static void main(String [] args){
-    System.out.println("                     Welcome to Evil Hangman !!");
-    System.out.println();
-    System.out.println("        Guess the secret word by entering one letter at a time");
+    System.out.println("----------------------------------------------------------------");
+    System.out.println("                  Welcome to Evil Hangman !!!                   ");
+    System.out.println("----------------------------------------------------------------");
+    System.out.println("     Guess the secret word by entering one letter at a time     ");
     System.out.println("               Choose how many chances to be play.              ");
     System.out.println("          If your chances are zero then you will be lose!       ");
-    System.out.println();
-    System.out.println("                         _ _ _ _ _ _ _ _ _");
-    System.out.println();
-    System.out.println("- if the letter is in the secret word, the blank will be filled in with the letter.");
-    System.out.println("- if the letter is not in the word, your lives will be minused one.");
+    System.out.println("----------------------------------------------------------------");
+    System.out.println("                    _ _ _ _ _ _ _ _ _ _ _                       ");
+    System.out.println("----------------------------------------------------------------");
+    System.out.println("              if the letter is in the secret word               ");
+    System.out.println("           the blank will be filled in with the letter.         ");
+    System.out.println("                if the letter is not in the word                ");
+    System.out.println("                your chances will be minused one.               ");
+    System.out.println("----------------------------------------------------------------");
     System.out.println();
     Scanner sc = new Scanner(System.in); // Scanner
     Hangman h = new Hangman(); // created an object
@@ -268,7 +272,7 @@ public class Hangman{
     String temp = letterGuessHistory.replaceAll(" ","");
     for(int i = 0; i< temp.length(); i++){
       if(temp.charAt(i)==ch){
-        System.out.println("Please input again // Be careful if you always answer wrong but you know about it, it will decrease your chance to guess");
+        System.out.println("                  Invalid input, Try again !!"                   );
         Scanner sc = new Scanner(System.in);
         makeGuess(sc.next().charAt(0));
       }
@@ -287,7 +291,7 @@ public class Hangman{
     return dashLine; // show dashline
   }
   public String getName(){
-     return name;
+    return name;
   }
   public void setName(String name){
     this.name = name;

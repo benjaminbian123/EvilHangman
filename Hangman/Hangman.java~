@@ -114,9 +114,9 @@ public class Hangman{
             //System.out.println("----------------------------------------------------------------");
             System.out.println();
             System.out.println("                  SORRY YOU LOSE !!");
-            System.out.println("         The secret word is : "+getSecretWord());
-            System.out.println("         Player name : "+getName());
-            System.out.println("         Guess remaining : "+guessCount());
+            System.out.println("         - The secret word is : "+getSecretWord());
+            System.out.println("         - Player name : "+getName());
+            System.out.println("         - Guess remaining : "+guessCount());
             System.out.println();
 //System.out.println("----------------------------------------------------------------");
           }
@@ -127,9 +127,9 @@ public class Hangman{
           //System.out.println("----------------------------------------------------------------");
           System.out.println();
           System.out.println("                CONGRATULATIONS YOU WIN !!");
-          System.out.println("           The secret word is : "+getSecretWord());
-          System.out.println("           Player name : "+getName());
-          System.out.println("           Guess remaining : "+guessCount());
+          System.out.println("           - The secret word is : "+getSecretWord());
+          System.out.println("           - Player name : "+getName());
+          System.out.println("           - Guess remaining : "+guessCount());
           System.out.println();
           //System.out.println("----------------------------------------------------------------");
           check = false;
@@ -234,7 +234,8 @@ public class Hangman{
     Scanner sc = new Scanner(System.in);
     while(check==false){
       System.out.println("                Do you want to play again ? (y/n)               ");
-      System.out.println("----------------------------------------------------------------");
+      System.out.println();
+//System.out.println("----------------------------------------------------------------");
       char input = sc.next().charAt(0);
       if(input=='y' || input=='Y'){ // Yes
         check = true;
@@ -244,9 +245,9 @@ public class Hangman{
         break;
       }
       else if(input=='n' || input=='N'){ // No
-        System.out.println("----------------------------------------------------------------");
+        //System.out.println("----------------------------------------------------------------");
         System.out.println("                     Thank for playing !!                       ");
-        System.out.println("----------------------------------------------------------------");
+        //System.out.println("----------------------------------------------------------------");
         isPlay = false;
         checkGuess = true;
         checkLength = true;
@@ -254,9 +255,9 @@ public class Hangman{
         break;
       }
       else { // not Y or N
-        System.out.println("----------------------------------------------------------------");
+        //System.out.println("----------------------------------------------------------------");
         System.out.println("                  Invalid input, Try again !!"                   );
-        System.out.println("----------------------------------------------------------------");
+        //System.out.println("----------------------------------------------------------------");
         check = false;
         playAgain();
       }
