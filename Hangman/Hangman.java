@@ -156,39 +156,52 @@ public class Hangman{
         //System.out.println(getSecretWord()); //show secret word
         //System.out.println(temp); // check word on dashline that == secret word?
         System.out.print("Enter a letter to guess : ");
-        makeGuess(sc.next().charAt(0)); // make a guess
+        
+        makeGuess(sc.next()); // make a guess
       }
     }
   }
   
-  public boolean makeGuess(char ch) {
-    guessResult = false;
-    letterGuess = ch;
-    checkHistory(letterGuess);
-    if(checkWord(letterGuess)){ //if your word guess = false
-      guessCount--;
+  public boolean makeGuess(String charx) {
+    Scanner sc = new Scanner(System.in);
+    char ch = charx.toLowerCase().charAt(0);
+    if((ch >= 65 && ch <= 122)){
       guessResult = false;
-    }
-    else{ // if word guess = true
-      for(int i = 0; i < secretWord.length(); i++){
-        if(secretWord.charAt(i) == ch){
-          String temp = "";
-          for(int j = 0; j < secretWord.length(); j++){
-            if(secretWord.charAt(j) == ch)
-            {
-              temp = temp + ch + " "; // store the word that exists
+      letterGuess = ch;
+      checkHistory(letterGuess);
+      if(checkWord(letterGuess)){ //if your word guess = false
+        guessCount--;
+        guessResult = false;
+      }
+      else{ // if word guess = true
+        for(int i = 0; i < secretWord.length(); i++){
+          if(secretWord.charAt(i) == ch){
+            String temp = "";
+            for(int j = 0; j < secretWord.length(); j++){
+              if(secretWord.charAt(j) == ch)
+              {
+                temp = temp + ch + " "; // store the word that exists
+              }
+              else
+              {
+                temp = temp + dashLine.charAt(2*j) + dashLine.charAt(2*j+1); // store one to one with _ and space        
+              }
             }
-            else
-            {
-              temp = temp + dashLine.charAt(2*j) + dashLine.charAt(2*j+1); // store one to one with _ and space        
-            }
+            dashLine = temp;
+            guessResult = true;
+            break;
           }
-          dashLine = temp;
-          guessResult = true;
-          break;
         }
       }
-    } 
+    } else {
+      System.out.println("----------------------------------------------------------------");
+      System.out.println("                  Invalid input, Try again !!"                   );
+      System.out.println("----------------------------------------------------------------");
+      System.out.print("Enter a letter to guess : ");
+      makeGuess(sc.next());
+    }
+    
+    
     return guessResult;
   }
   
@@ -274,7 +287,7 @@ public class Hangman{
       if(temp.charAt(i)==ch){
         System.out.println("                  Invalid input, Try again !!"                   );
         Scanner sc = new Scanner(System.in);
-        makeGuess(sc.next().charAt(0));
+        makeGuess(sc.next());
       }
     }
   }
