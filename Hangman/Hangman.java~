@@ -20,6 +20,17 @@ public class Hangman{
   File dict = new File("dictionary.txt"); // dictionary 
   
   public static void main(String [] args){
+    System.out.println("                     Welcome to Evil Hangman !!");
+    System.out.println();
+    System.out.println("        Guess the secret word by entering one letter at a time");
+    System.out.println("               Choose how many chances to be play.              ");
+    System.out.println("          If your chances are zero then you will be lose!       ");
+    System.out.println();
+    System.out.println("                         _ _ _ _ _ _ _ _ _");
+    System.out.println();
+    System.out.println("- if the letter is in the secret word, the blank will be filled in with the letter.");
+    System.out.println("- if the letter is not in the word, your lives will be minused one.");
+    System.out.println();
     Scanner sc = new Scanner(System.in); // Scanner
     Hangman h = new Hangman(); // created an object
     h.play(); // play it
@@ -59,20 +70,6 @@ public class Hangman{
   public void play(){ // play method
     Scanner sc = new Scanner(System.in);
     isPlay = true;
-    System.out.println("----------------------------------------------------------------");
-    System.out.println("                  Welcome to Evil Hangman !!!                   ");
-    System.out.println("----------------------------------------------------------------");
-    System.out.println("     Guess the secret word by entering one letter at a time     ");
-    System.out.println("               Choose how many chances to be play.              ");
-    System.out.println("          If your chances are zero then you will be lose!       ");
-    System.out.println("----------------------------------------------------------------");
-    System.out.println("                    _ _ _ _ _ _ _ _ _ _ _                       ");
-    System.out.println("----------------------------------------------------------------");
-    System.out.println("              if the letter is in the secret word               ");
-    System.out.println("           the blank will be filled in with the letter.         ");
-    System.out.println("                if the letter is not in the word                ");
-    System.out.println("                your chances will be minused one.               ");
-    System.out.println("----------------------------------------------------------------");
     
     while(isPlay==true){ // while user played
       
@@ -114,38 +111,44 @@ public class Hangman{
         if(guessCount==0){ // LOSE
           isPlay = false; // stop user
           if(check==false){
-            System.out.println("----------------------------------------------------------------");
-            System.out.println("SORRY YOU LOSE !!");
-            System.out.println("The secret word is : "+getSecretWord());
-            System.out.println("Player name : "+getName());
-            System.out.println("Guess remaining : "+guessCount());
-            System.out.println("----------------------------------------------------------------");
+            //System.out.println("----------------------------------------------------------------");
+            System.out.println();
+            System.out.println("                  SORRY YOU LOSE !!");
+            System.out.println("         The secret word is : "+getSecretWord());
+            System.out.println("         Player name : "+getName());
+            System.out.println("         Guess remaining : "+guessCount());
+            System.out.println();
+//System.out.println("----------------------------------------------------------------");
           }
           playAgain(); // ask to play again
           break;
         }
         else if(temp.equals(getSecretWord())){ // WIN
-          System.out.println("----------------------------------------------------------------");
-          System.out.println("CONGRATULATIONS YOU WIN !!");
-          System.out.println("The secret word is : "+getSecretWord());
-          System.out.println("Player name : "+getName());
-          System.out.println("Guess remaining : "+guessCount());
-          System.out.println("----------------------------------------------------------------");
+          //System.out.println("----------------------------------------------------------------");
+          System.out.println();
+          System.out.println("                CONGRATULATIONS YOU WIN !!");
+          System.out.println("           The secret word is : "+getSecretWord());
+          System.out.println("           Player name : "+getName());
+          System.out.println("           Guess remaining : "+guessCount());
+          System.out.println();
+          //System.out.println("----------------------------------------------------------------");
           check = false;
           playAgain();
           break;
         } 
         
-        System.out.println("----------------------------------------------------------------");
-        System.out.println("Word length : "+secretWordLength);
-        System.out.println("Word count : "+wordCount);
-        System.out.println("----------------------------------------------------------------");
+        //System.out.println("----------------------------------------------------------------");
+        //System.out.println("Word length : "+secretWordLength);
+        //System.out.println("Word count : "+wordCount);
+        //System.out.println("----------------------------------------------------------------");
+        System.out.println();
         System.out.println("Word : "+displayDashline());
         System.out.println("Guess remaining : "+guessCount());
-        System.out.println("----------------------------------------------------------------");
+//System.out.println("----------------------------------------------------------------");
         System.out.println("Player name : "+getName());
         System.out.println("Letter that you already used :"+showLetterGuess());
-        System.out.println("----------------------------------------------------------------");
+        System.out.println();
+        //System.out.println("----------------------------------------------------------------");
         //System.out.println(getSecretWord()); //show secret word
         //System.out.println(temp); // check word on dashline that == secret word?
         System.out.print("Enter a letter to guess : ");
